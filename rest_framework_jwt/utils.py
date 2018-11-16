@@ -64,6 +64,9 @@ def jwt_payload_handler(user):
     if api_settings.JWT_ISSUER is not None:
         payload['iss'] = api_settings.JWT_ISSUER
 
+    if api_settings.JWT_SUBJECT is not None:
+        payload['sub'] = api_settings.JWT_SUBJECT
+        
     return payload
 
 
@@ -111,6 +114,7 @@ def jwt_decode_handler(token):
         leeway=api_settings.JWT_LEEWAY,
         audience=api_settings.JWT_AUDIENCE,
         issuer=api_settings.JWT_ISSUER,
+        subject=api_settings.JWT_SUBJECT,
         algorithms=[api_settings.JWT_ALGORITHM]
     )
 
